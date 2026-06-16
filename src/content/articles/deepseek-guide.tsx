@@ -15,13 +15,6 @@ export function renderDeepSeekGuide() {
         <strong>⚠️ 建议先理解</strong>：本文讨论的是 MCP 挂载方案（Claude + DeepSeek 协同），不是 API 替换方案（用 DeepSeek 完全替代 Claude）。两者的工作原理、适用场景和限制完全不同。混淆这两者会导致&ldquo;配置成功但不生效&rdquo;的困惑。
       </div>
 
-      <Collapsible summary="AI 代劳">
-        <div className="callout callout-info">
-          本文包含的命令和配置均可交由 AI 编程工具（Claude Code、Codex CLI、Cursor 等）代劳——选取需要的部分发送即可。详见{" "}
-          <a href="/articles/ai-pair-workflow" style={{ color: "var(--color-accent)" }}>「阅读本站前」</a>。
-        </div>
-      </Collapsible>
-
       {/* ===== 二、API vs MCP ===== */}
       <h2 id="api-vs-mcp">二、核心概念讲解：API vs MCP</h2>
 

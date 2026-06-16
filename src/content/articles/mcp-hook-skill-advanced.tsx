@@ -12,13 +12,6 @@ export function renderMCPHookSkillAdvanced() {
         Claude Code 不是一个封闭的黑盒，而是一个开放的开发平台。通过 MCP（模型上下文协议）、Hook（钩子系统）、Skill（技能系统）、SubAgent（子代理）、Memory（记忆系统）和 Workflow（工作流）六大扩展机制，你可以将 Claude Code 从&ldquo;对话助手&rdquo;扩展为&ldquo;更高效的开发工具&rdquo;。
       </p>
 
-      <Collapsible summary="AI 代劳">
-        <div className="callout callout-info">
-          本文包含的命令和配置均可交由 AI 编程工具（Claude Code、Codex CLI、Cursor 等）代劳——选取需要的部分发送即可。详见{" "}
-          <a href="/articles/ai-pair-workflow" style={{ color: "var(--color-accent)" }}>「阅读本站前」</a>。
-        </div>
-      </Collapsible>
-
       <figure className="my-6">
         <div
           className="rounded-xl overflow-hidden border"

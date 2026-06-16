@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { Download, Settings, Wrench, BookOpen } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LiquidGlass } from "@/components/layout/liquid-glass";
@@ -15,14 +14,6 @@ interface Props {
 }
 
 export function GuideTabs({ toolId, activeGuide, guideTypes }: Props) {
-  const router = useRouter();
-
-  const handleTabChange = useCallback(
-    (value: string) => {
-      router.push(`/${toolId}/${value}`, { scroll: false });
-    },
-    [router, toolId],
-  );
 
   // Expand problem card from URL hash — handles 3 scenarios:
   // 1. Navigate from install page (activeGuide change triggers effect)
@@ -58,8 +49,7 @@ export function GuideTabs({ toolId, activeGuide, guideTypes }: Props) {
 
   return (
     <Tabs
-      value={activeGuide}
-      onValueChange={handleTabChange}
+      defaultValue={activeGuide}
       className="animate-fade-up stagger-2"
     >
       <LiquidGlass variant="light" rounded="1rem" className="mb-10 p-1.5">
@@ -68,7 +58,7 @@ export function GuideTabs({ toolId, activeGuide, guideTypes }: Props) {
             <TabsTrigger
               key={gt.id}
               value={gt.id}
-              className="gap-1.5 sm:gap-2.5 rounded-lg sm:rounded-xl px-2 sm:px-5 py-2.5 sm:py-3 text-[13px] sm:text-[16px] font-semibold whitespace-nowrap transition-colors duration-150 hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-overlay)] data-[state=active]:text-[var(--color-accent)] data-[state=active]:bg-[var(--color-accent-glow)] data-[state=active]:cursor-default data-[state=active]:pointer-events-none"
+              className="gap-1.5 sm:gap-2.5 rounded-lg sm:rounded-xl px-2 sm:px-5 py-2.5 sm:py-3 text-[13px] sm:text-[16px] font-semibold whitespace-nowrap transition-all duration-200 hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-overlay)] data-active:!text-white data-active:!bg-[var(--color-accent)] data-active:shadow-lg data-active:shadow-[var(--color-accent-glow)] data-active:scale-[1.02] data-active:cursor-default data-active:pointer-events-none data-active:ring-2 data-active:ring-[var(--color-accent)]/25 data-active:hover:!bg-[var(--color-accent)]"
             >
               {gt.id === "install" && <Download className="h-[18px] w-[18px]" />}
               {gt.id === "config" && <Settings className="h-[18px] w-[18px]" />}

@@ -10,6 +10,14 @@ import { getNavIndex, filterNav, type NavItem } from "@/lib/search";
 const isMac = typeof navigator !== "undefined" && /Mac/i.test(navigator.platform);
 const modKey = isMac ? "⌘" : "Ctrl";
 
+/** 在文本中高亮匹配关键词（case-insensitive），用 `<mark>` 包裹 */
+function highlightMatch(text: string, q: string): string {
+  if (!q || !text) return text;
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp(`(${escaped})`, "gi");
+  return text.replace(re, "<mark>$1</mark>");
+}
+
 export function CommandPalette() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -126,6 +134,7 @@ export function CommandPalette() {
                   </div>
 
                   {/* Results */}
+                  <style>{`mark { background: var(--color-accent-glow); color: var(--color-accent); border-radius: 2px; }`}</style>
                   <div className="max-h-80 overflow-y-auto p-2">
                     {results.length === 0 ? (
                       <p className="px-3 py-8 text-center text-[14px]" style={{ color: "var(--color-text-muted)" }}>
@@ -149,13 +158,26 @@ export function CommandPalette() {
                             <Wrench className="h-4 w-4 shrink-0" style={{ color: "var(--color-text-muted)" }} />
                           ) : null}
                           <span className="flex-1 min-w-0">
-                            <span className={`block font-medium truncate ${item.level === "step" ? "text-[14px]" : "text-[15px]"}`} style={{ color: "var(--color-text-primary)" }}>
-                              {item.level === "step" ? <span style={{ color: "var(--color-text-muted)", marginRight: "4px" }}>›</span> : null}
-                              {item.title}
-                            </span>
-                            <span className="block text-[12px] mt-0.5 truncate" style={{ color: "var(--color-text-muted)" }}>
-                              {item.subtitle}
-                            </span>
+                            <span
+                              className={`block font-medium truncate ${item.level === "step" ? "text-[14px]" : "text-[15px]"}`}
+                              style={{ color: "var(--color-text-primary)" }}
+                              dangerouslySetInnerHTML={{
+                                __html: (item.level === "step" ? `<span style="color:var(--color-text-muted);margin-right:4px">›</span>` : "")
+                                  + highlightMatch(item.title, query),
+                              }}
+                            />
+                            <span
+                              className="block text-[12px] mt-0.5 truncate"
+                              style={{ color: "var(--color-text-muted)" }}
+                              dangerouslySetInnerHTML={{ __html: highlightMatch(item.subtitle, query) }}
+                            />
+                            {item.snippet && (
+                              <span
+                                className="block text-[12px] mt-1 leading-relaxed line-clamp-2"
+                                style={{ color: "var(--color-text-disabled)" }}
+                                dangerouslySetInnerHTML={{ __html: highlightMatch(item.snippet, query) }}
+                              />
+                            )}
                           </span>
                           <CornerDownLeft className="h-3 w-3 shrink-0 opacity-40" style={{ color: "var(--color-text-muted)" }} />
                         </button>

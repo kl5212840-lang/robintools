@@ -14,11 +14,6 @@ export function renderClaudeHUDSetup() {
         <strong>写作环境</strong>：Windows 11 + PowerShell 7 + Claude Code v2.x + Claude HUD（2026-06 验证）。
       </Callout>
 
-      <Callout type="info" summary="AI 代劳">
-        本文包含的命令和配置均可交由 AI 编程工具（Claude Code、Codex CLI、Cursor 等）代劳——选取需要的部分发送即可。详见{" "}
-        <a href="/articles/ai-pair-workflow" style={{"color": "var(--color-accent)"}}>「阅读本站前」</a>。
-      </Callout>
-
       {/* ===== 一、安装 ===== */}
       <h2 id="install">一、安装</h2>
 

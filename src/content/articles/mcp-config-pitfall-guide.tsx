@@ -17,14 +17,6 @@ export function renderMCPConfigPitfallGuide() {
         但 backups 缓存的问题同样值得了解。
       </p>
 
-
-      <Collapsible summary="AI 代劳">
-        <div className="callout callout-info">
-          本文包含的命令和配置均可交由 AI 编程工具（Claude Code、Codex CLI、Cursor 等）代劳——选取需要的部分发送即可。详见{" "}
-          <a href="/articles/ai-pair-workflow" style={{ color: "var(--color-accent)" }}>「阅读本站前」</a>。
-        </div>
-      </Collapsible>
-
       {/* ===== 一、你应该用哪种方法？ ===== */}
       <h2 id="quick-decision">一、你应该用哪种方法？（快速决策）</h2>
 

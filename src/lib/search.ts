@@ -20,6 +20,10 @@ export interface NavItem {
   href: string;
   keywords: string[];
   level: "tool" | "guide" | "step" | "article" | "troubleshoot";
+  /** 用于 snippet 生成的纯文本正文（不参与搜索索引） */
+  searchContent?: string;
+  /** filterNav 时填充，匹配关键词的上下文片段 */
+  snippet?: string;
 }
 
 /** 文章摘要截断长度 */
@@ -44,6 +48,7 @@ export function getNavIndex(): NavItem[] {
       href: `/${tool.id}`,
       keywords: [tool.name, tool.nameZh, ...tool.platforms],
       level: "tool",
+      searchContent: tool.description,
     });
   }
 
@@ -54,6 +59,7 @@ export function getNavIndex(): NavItem[] {
     href: "/compare",
     keywords: ["对比", "比较", "选择"],
     level: "tool",
+    searchContent: "多维度对比 Claude Code、Codex CLI、Cursor、GitHub Copilot 等主流 AI 编程工具的功能、价格与适用场景",
   });
   items.push({
     title: "技术笔记",
@@ -61,6 +67,7 @@ export function getNavIndex(): NavItem[] {
     href: "/articles",
     keywords: ["笔记", "文章", "教程", "配置"],
     level: "tool",
+    searchContent: "AI 编程工具的使用记录与配置参考——安装教程、MCP 排错、终端美化、Token 优化等实战笔记",
   });
 
   // 工具指南（level=guide）— 搜索时匹配
@@ -79,6 +86,7 @@ export function getNavIndex(): NavItem[] {
         href: `/${tool.id}/${guide.id}`,
         keywords: [tool.name, tool.nameZh, typeInfo.nameZh, typeInfo.name],
         level: "guide",
+        searchContent: typeInfo.description || tool.description,
       });
     }
   }
@@ -92,6 +100,7 @@ export function getNavIndex(): NavItem[] {
       href: `/articles/${a.slug}`,
       keywords: a.tags,
       level: "article",
+      searchContent: a.summary,
     });
   }
 
@@ -105,6 +114,7 @@ export function getNavIndex(): NavItem[] {
       href: `/${s.toolId}/${s.guideType}#${s.anchorId}`,
       keywords: [s.stepLabel, s.guideName, s.toolName, ...extraKeywords],
       level: "step",
+      searchContent: s.searchText,
     });
   }
 
@@ -117,6 +127,7 @@ export function getNavIndex(): NavItem[] {
       href: `/${card.toolId}/troubleshoot#${card.id}`,
       keywords: [card.toolName, card.title, card.desc, ...extraKeywords],
       level: "troubleshoot",
+      searchContent: card.searchText,
     });
   }
 
@@ -150,19 +161,72 @@ function searchableText(item: NavItem): string {
   return [base, py].join(" ");
 }
 
+/**
+ * 根据原始查询词在条目 searchContent 中生成上下文片段。
+ * 仅在 searchContent 存在原始查询词、且匹配位置不在 subtitle 已展示的头部区域时生成。
+ */
+function generateSnippet(query: string, content?: string, subtitle?: string): string | undefined {
+  if (!content || content.length < 20) return undefined;
+  const rawQuery = query.trim();
+  if (!rawQuery) return undefined;
+
+  const idx = content.toLowerCase().indexOf(rawQuery.toLowerCase());
+  if (idx === -1) return undefined;
+
+  // 跳过已被 subtitle 覆盖的头部区域（subtitle 通常展示前 60 字左右）
+  const HEAD_COVERED = 60;
+  if (subtitle && idx < HEAD_COVERED && content.startsWith(subtitle.replace(/…$/, "").slice(0, HEAD_COVERED))) {
+    return undefined;
+  }
+
+  const SNIPPET_RADIUS = 35;
+  const start = Math.max(0, idx - SNIPPET_RADIUS);
+  const end = Math.min(content.length, idx + rawQuery.length + SNIPPET_RADIUS);
+
+  let s = content.slice(start, end);
+  if (start > 0) s = "…" + s;
+  if (end < content.length) s = s + "…";
+  return s;
+}
+
 /** 默认视图显示的最新文章数 */
 const DEFAULT_ARTICLE_COUNT = 3;
+
+/** 结果层级排序权重：越小越靠前 */
+const LEVEL_PRIORITY: Record<NavItem["level"], number> = {
+  article:      0,  // 文章标题匹配，最精准
+  troubleshoot: 1,  // 报错卡 desc 匹配
+  guide:        2,  // 指南
+  step:         3,  // 步骤
+  tool:         4,  // 工具描述匹配，最泛
+};
 
 /** 过滤导航项 */
 export function filterNav(query: string, items: NavItem[]): NavItem[] {
   if (!query.trim()) {
-    // 默认视图：固定入口 + 最新 N 篇文章
     const tools = items.filter((item) => item.level === "tool");
     const latest = items.filter((item) => item.level === "article").slice(0, DEFAULT_ARTICLE_COUNT);
     return [...tools, ...latest];
   }
   const q = normalize(query);
   if (!q) return [];
-  // 有搜索词时在所有层级中匹配
-  return items.filter((item) => searchableText(item).includes(q));
+
+  let matched = items
+    .filter((item) => searchableText(item).includes(q))
+    .sort((a, b) => LEVEL_PRIORITY[a.level] - LEVEL_PRIORITY[b.level]);
+
+  // 去重：tool 级已匹配的工具，跳过其 guide 级条目（避免同一段 tool.description 重复展示）
+  const matchedToolRoots = new Set(
+    matched.filter((i) => i.level === "tool").map((i) => i.href)
+  );
+  matched = matched.filter((item) => {
+    if (item.level !== "guide") return true;
+    const toolRoot = item.href.replace(/\/[^/]+$/, ""); // /cline/install → /cline
+    return !matchedToolRoots.has(toolRoot);
+  });
+
+  return matched.map((item) => ({
+    ...item,
+    snippet: generateSnippet(query, item.searchContent, item.subtitle),
+  }));
 }

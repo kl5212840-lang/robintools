@@ -22,13 +22,6 @@ export function renderSearxngDocReviewWorkflow() {
         ③ 多引擎搜索的组合策略和调优方法。
       </div>
 
-      <Collapsible summary="AI 代劳">
-        <div className="callout callout-info">
-          本文包含的命令和配置均可交由 AI 编程工具（Claude Code、Codex CLI、Cursor 等）代劳——选取需要的部分发送即可。详见{" "}
-          <a href="/articles/ai-pair-workflow" style={{ color: "var(--color-accent)" }}>「阅读本站前」</a>。
-        </div>
-      </Collapsible>
-
       {/* ===== 一、SearXNG 部署 ===== */}
       <h2 id="searxng-deploy">一、SearXNG 本地部署</h2>
       <p>

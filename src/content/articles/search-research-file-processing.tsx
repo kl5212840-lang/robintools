@@ -10,13 +10,6 @@ export function renderSearchResearchFileProcessing() {
         很多人把 Claude Code 当成终端版的 ChatGPT——输入问题、得到答案、复制粘贴到代码编辑器。这没有充分利用 Claude Code 的核心能力：<strong>它可以在本地直接读写文件、运行命令和管理项目，而不仅是返回文本建议</strong>。
       </p>
 
-      <Collapsible summary="AI 代劳">
-        <div className="callout callout-info">
-          本文包含的命令和配置均可交由 AI 编程工具（Claude Code、Codex CLI、Cursor 等）代劳——选取需要的部分发送即可。详见{" "}
-          <a href="/articles/ai-pair-workflow" style={{ color: "var(--color-accent)" }}>「阅读本站前」</a>。
-        </div>
-      </Collapsible>
-
       <h3>场景速查：搜索 · 抓取 · 文件处理工具选型</h3>
       <div className="overflow-x-auto">
         <table className="w-full text-[15px] my-3" style={{ borderCollapse: "collapse" }}>

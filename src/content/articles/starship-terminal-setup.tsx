@@ -14,11 +14,6 @@ export function renderStarshipTerminalSetup() {
         不同平台安装方式不同，配置逻辑相同。
       </Callout>
 
-      <Callout type="info" summary="AI 代劳">
-        本文包含的命令和配置均可交由 AI 编程工具（Claude Code、Codex CLI、Cursor 等）代劳——选取需要的部分发送即可。详见{" "}
-        <a href="/articles/ai-pair-workflow" style={{"color": "var(--color-accent)"}}>「阅读本站前」</a>。
-      </Callout>
-
       {/* ===== 一、安装 ===== */}
       <h2 id="install">一、安装</h2>
       <p>

@@ -11,13 +11,6 @@ export function renderAiSecurityCompliance() {
         本文介绍如何在 Cursor 和 Claude Code 中配置安全边界，在享受 AI 提效的同时保护代码资产。
       </p>
 
-      <Collapsible summary="AI 代劳">
-        <div className="callout callout-info">
-          本文包含的命令和配置均可交由 AI 编程工具（Claude Code、Codex CLI、Cursor 等）代劳——选取需要的部分发送即可。详见{" "}
-          <a href="/articles/ai-pair-workflow" style={{ color: "var(--color-accent)" }}>「阅读本站前」</a>。
-        </div>
-      </Collapsible>
-
       <h2 id="cursorignore">一、Cursor：配置 .cursorignore</h2>
       <p>
         注意：<code>.gitignore</code> 只能阻止 Git 提交，不能阻止 Cursor 的 AI 引擎读取文件。需要单独创建 <code>.cursorignore</code> 文件来指定 AI 不可读取的内容。
