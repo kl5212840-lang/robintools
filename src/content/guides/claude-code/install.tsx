@@ -186,6 +186,16 @@ function renderClaudeInstall(platform: Platform) {
 
       <CodeBlock language="bash" code={`# 切换镜像源后执行安装（Windows / macOS / Linux 通用，需 Node.js 18+）\nnpm install -g @anthropic-ai/claude-code\n\n# 验证安装\nclaude --version\n# 应输出版本号如 2.1.x`} />
 
+      {(!isWin && !isMac) && (
+        <Callout type="warning" summary="Linux 用户 — 如果遇到 EACCES 权限错误">
+          Linux 下全局安装 npm 包默认写入系统目录 <code>/usr/local/lib/node_modules</code>，普通用户无写入权限，会报 <code>EACCES: permission denied, mkdir</code>。<strong>推荐方案</strong>：配置 npm 用用户目录，一劳永逸：
+          <CodeBlock language="bash" code={`# 创建用户级全局安装目录\nmkdir -p ~/.npm-global\n\n# 配置 npm\nnpm config set prefix ~/.npm-global\n\n# 将该目录的 bin 加入 PATH（追加到 ~/.bashrc 或 ~/.zshrc）\necho 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc\nsource ~/.bashrc\n\n# 然后重新执行安装\nnpm install -g @anthropic-ai/claude-code`} />
+          <p style={{ color: "var(--color-text-muted)", fontSize: "0.9rem" }}>
+            不推荐 <code>sudo npm install -g</code>——以 root 运行的 npm 脚本存在安全风险，且后续更新都可能需要 sudo。
+          </p>
+        </Callout>
+      )}
+
       <Callout type="info" summary="迁移到原生安装">
         如后续想切换至官方推荐的原生安装，在终端运行 <code>claude install</code> 即可一键迁移。所有配置、会话、记忆完整保留，无需卸载重装。
       </Callout>
