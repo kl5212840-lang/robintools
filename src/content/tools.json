@@ -1,0 +1,195 @@
+{
+  "guideTypes": [
+    {
+      "id": "install",
+      "name": "Install",
+      "nameZh": "安装指南",
+      "description": "从零开始安装工具",
+      "icon": "Download"
+    },
+    {
+      "id": "config",
+      "name": "Config",
+      "nameZh": "配置指南",
+      "description": "接入模型与网络配置",
+      "icon": "Settings"
+    },
+    {
+      "id": "troubleshoot",
+      "name": "Troubleshoot",
+      "nameZh": "故障排查",
+      "description": "常见报错与解决方案",
+      "icon": "Wrench"
+    },
+    {
+      "id": "tutorial",
+      "name": "Tutorial",
+      "nameZh": "使用教程",
+      "description": "场景化使用教程",
+      "icon": "BookOpen"
+    }
+  ],
+  "tools": [
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "nameZh": "Claude Code",
+      "description": "Anthropic 推出的 AI 编程助手，能直接在你的电脑上读写文件、运行命令、管理项目",
+      "icon": "Terminal",
+      "difficulty": 2,
+      "estimatedTime": "10-20min",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "color": "blue",
+      "pricing": "Free / Pro $20/月 / Max $100-200/月",
+      "status": "ready",
+      "availableGuides": [
+        "install",
+        "config",
+        "troubleshoot",
+        "tutorial"
+      ]
+    },
+    {
+      "id": "codex",
+      "name": "Codex CLI",
+      "nameZh": "Codex CLI",
+      "description": "OpenAI 推出的命令行 AI 编程助手，基于 GPT 模型，默认沙箱安全运行",
+      "icon": "Box",
+      "difficulty": 2,
+      "estimatedTime": "10-15min",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "color": "emerald",
+      "pricing": "Free（需 API Key 或 ChatGPT 订阅）",
+      "status": "ready",
+      "availableGuides": [
+        "install",
+        "config",
+        "troubleshoot",
+        "tutorial"
+      ]
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "nameZh": "Cursor",
+      "description": "基于 VS Code 的 AI-first 编辑器，深度集成 AI 辅助编码",
+      "icon": "PenTool",
+      "difficulty": 1,
+      "estimatedTime": "5min",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "color": "purple",
+      "pricing": "Free / Pro $20/月",
+      "status": "ready",
+      "availableGuides": [
+        "install",
+        "config",
+        "tutorial",
+        "troubleshoot"
+      ]
+    },
+    {
+      "id": "copilot",
+      "name": "GitHub Copilot",
+      "nameZh": "Copilot",
+      "description": "GitHub 出品的 AI 编程助手，深度集成 VS Code 和 JetBrains",
+      "icon": "GitBranch",
+      "difficulty": 1,
+      "estimatedTime": "5-10min",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "color": "amber",
+      "pricing": "Free / Pro $10/月",
+      "status": "ready",
+      "availableGuides": [
+        "install",
+        "config",
+        "troubleshoot",
+        "tutorial"
+      ]
+    },
+    {
+      "id": "windsurf",
+      "name": "Windsurf",
+      "nameZh": "Windsurf",
+      "description": "Codeium 推出的 AI-first IDE，深度集成 Cascade AI 代理，支持多文件编辑和智能上下文理解",
+      "icon": "Wind",
+      "difficulty": 1,
+      "estimatedTime": "5min",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "color": "teal",
+      "pricing": "Free / Pro $15/月",
+      "status": "ready",
+      "availableGuides": [
+        "install",
+        "config",
+        "tutorial",
+        "troubleshoot"
+      ]
+    },
+    {
+      "id": "cline",
+      "name": "Cline",
+      "nameZh": "Cline",
+      "description": "基于 VS Code 的自主 AI 编程代理，支持多模型提供商、MCP 深度集成、多代理协作和定时任务",
+      "icon": "Bot",
+      "difficulty": 2,
+      "estimatedTime": "10-20min",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "color": "cyan",
+      "pricing": "免费开源",
+      "status": "ready",
+      "availableGuides": [
+        "install",
+        "config",
+        "troubleshoot",
+        "tutorial"
+      ]
+    },
+    {
+      "id": "github-spark",
+      "name": "GitHub Spark",
+      "nameZh": "Spark",
+      "description": "GitHub 推出的自然语言应用构建工具，描述想法即可生成完整 Web 应用并一键部署",
+      "icon": "Sparkles",
+      "difficulty": 1,
+      "estimatedTime": "5min",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "color": "violet",
+      "pricing": "免费（预览阶段）",
+      "status": "ready",
+      "availableGuides": [
+        "install",
+        "config",
+        "troubleshoot",
+        "tutorial"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# local dev config — contains real API keys, NEVER commit
+.claude/*
+!.claude/commands/
+!.claude/hooks/
+*.local.json
+settings.local.json
+
+# dev tooling (not needed for production)
+.agents/
+skills-lock.json
+
+# project docs (keep locally, not in repo)
+CHANGELOG.md
+PRODUCT.md
+PROJECT_CHARTER.md
+docs/
+
+# 本地素材（不推送到仓库）
+本地素材/
+
+# build scripts (local use only) — see 本地素材/脚本工具/
+scripts/generate-*
+scripts/pre-commit
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
