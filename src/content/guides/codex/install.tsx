@@ -196,7 +196,7 @@ function renderCodexInstall(platform: Platform) {
         <strong>重要安全提醒</strong>：① 新手建议使用默认的 <code>workspace-write</code> 模式；② 绝对不要让 Codex 执行清理或删除文件夹的操作；③ 操作前用 Git 提交代码；④ <code>danger-full-access</code> 有全盘清空风险，除非你完全清楚后果，否则不要使用。沙箱模式在 <code>~/.codex/config.toml</code> 中配置（详见「配置指南」）。
       </Callout>
 
-      <FreshnessNote>以上安装步骤涉及的版本号（Node.js 22+、Codex CLI v0.131.0）和 npm 镜像源验证于 2026-06。工具版本迭代频繁，建议以各项目官方文档为准。</FreshnessNote>
+      <FreshnessNote>以上安装步骤涉及的版本号（Node.js 22+、Codex CLI v0.131.0）和 npm 镜像源验证于 2026-06-17。工具版本迭代频繁，建议以各项目官方文档为准。</FreshnessNote>
     </div>
   );
 }

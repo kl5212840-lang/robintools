@@ -22,7 +22,7 @@ function renderClaudeInstall(platform: Platform) {
         <strong>npm 安装已标记弃用</strong>：自 v2.1.15（2026 年 1 月）起，官方不再推荐 <code>npm install -g @anthropic-ai/claude-code</code>，原生安装器成为首选。npm 包仍正常更新（最新版 2.1.177），仍可正常使用，只是存在依赖冲突和权限问题的可能。如已用 npm 安装，运行 <code>claude install</code> 即可一键迁至原生版——无需重装，所有配置完整保留。
         </Callout>
       </Collapsible>
-      <FreshnessNote>以上 npm 弃用状态、版本号验证于 2026-06。</FreshnessNote>
+      <FreshnessNote>以上 npm 弃用状态、版本号验证于 2026-06-17。</FreshnessNote>
 
       <h2 id="section-prereqs"><span className="step-badge">1</span>安装前置依赖</h2>
       {isWin && (
