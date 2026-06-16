@@ -58,7 +58,7 @@ function renderClaudeInstall(platform: Platform) {
       {!isWin && !isMac && (
         <>
           <p>确保系统已安装 <strong>curl</strong>、<strong>git</strong> 和 <strong>Node.js 18+</strong>：</p>
-          <CodeBlock language="bash" code={`# Debian/Ubuntu\nsudo apt update && sudo apt install -y curl git\n\n# 安装 Node.js 22.x（推荐）\ncurl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -\nsudo apt install -y nodejs\n\n# 验证安装\ngit --version && node --version\n# git 应输出版本号如 git version 2.x.x\n# node 应输出版本号如 v22.x.x`} />
+          <CodeBlock language="bash" code={`# Debian/Ubuntu\nsudo apt update && sudo apt install -y curl git\n\n# 安装 Node.js 22.x（推荐）\n# 先清理可能残留的旧版 libnode-dev（否则 dpkg 会冲突）\nsudo apt purge -y libnode-dev nodejs nodejs-dev 2>/dev/null\ncurl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -\nsudo apt install -y nodejs\n\n# 验证安装\ngit --version && node --version\n# git 应输出版本号如 git version 2.x.x\n# node 应输出版本号如 v22.x.x`} />
           <p style={{ color: "var(--color-text-muted)", fontSize: "0.9rem" }}>
             Fedora 用户：<code>sudo dnf install -y curl git nodejs</code>。Arch 用户：<code>sudo pacman -S curl git nodejs</code>。
           </p>

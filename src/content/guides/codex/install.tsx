@@ -69,7 +69,7 @@ function renderCodexInstall(platform: Platform) {
 
           <h3>2.2 在 WSL2 中安装 Node.js</h3>
           <p>打开 Ubuntu 终端，执行以下命令：</p>
-          <CodeBlock language="bash" code={`# 更新包列表\nsudo apt update\n\n# 安装 Node.js 22.x（推荐版本）\n# 方法一：使用 NodeSource 官方源\ncurl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -\nsudo apt install -y nodejs\n\n# 方法二：使用 nvm（版本管理更灵活，推荐）\ncurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash\n# 关闭终端重新打开，然后：\nnvm install 22\nnvm use 22`} />
+          <CodeBlock language="bash" code={`# 更新包列表\nsudo apt update\n\n# 安装 Node.js 22.x（推荐版本）\n# 先清理可能残留的旧版 libnode-dev（否则 dpkg 会冲突）\nsudo apt purge -y libnode-dev nodejs nodejs-dev 2>/dev/null\n# 方法一：使用 NodeSource 官方源\ncurl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -\nsudo apt install -y nodejs\n\n# 方法二：使用 nvm（版本管理更灵活，推荐）\ncurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash\n# 关闭终端重新打开，然后：\nnvm install 22\nnvm use 22`} />
           <p style={{ color: "var(--color-text-muted)", fontSize: "0.85rem" }}>
             ⚠️ <code>raw.githubusercontent.com</code> 在国内可能间歇性无法访问。如遇超时，可通过代理访问，或改用方法一（NodeSource 官方源）安装 Node.js。
           </p>
@@ -89,7 +89,7 @@ function renderCodexInstall(platform: Platform) {
         <>
           <h3>2.1 安装 Node.js</h3>
           <p>确保系统已安装 <strong>curl</strong> 和 <strong>git</strong>，然后安装 Node.js：</p>
-          <CodeBlock language="bash" code={`# 安装基础工具（Debian/Ubuntu）\nsudo apt update && sudo apt install -y curl git\n\n# 安装 Node.js 22.x\ncurl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -\nsudo apt install -y nodejs`} />
+          <CodeBlock language="bash" code={`# 安装基础工具（Debian/Ubuntu）\nsudo apt update && sudo apt install -y curl git\n\n# 安装 Node.js 22.x\n# 先清理可能残留的旧版 libnode-dev（否则 dpkg 会冲突）\nsudo apt purge -y libnode-dev nodejs nodejs-dev 2>/dev/null\ncurl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -\nsudo apt install -y nodejs`} />
           <p style={{ color: "var(--color-text-muted)", fontSize: "0.9rem" }}>Fedora 用户：先运行 <code>sudo dnf install -y curl git</code>，再使用 nvm 安装 Node.js 22（推荐，版本管理更灵活）：<code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash</code>，重启终端后执行 <code>nvm install 22</code>。</p>
         </>
       )}
