@@ -31,8 +31,10 @@ function renderClaudeInstall(platform: Platform) {
           <CodeBlock language="powershell" code={`# 安装 Git for Windows\nwinget install Git.Git\n\n# 安装 Node.js 22.x（LTS）\nwinget install OpenJS.NodeJS.LTS`} />
           <Collapsible summary="如果没有 winget">
             <p style={{ color: "var(--color-text-muted)", fontSize: "0.9rem" }}>
-              Git 从 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git-scm.com <ExternalLink className="inline h-3 w-3" /></a> 手动下载安装；
-              Node.js 从 <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org <ExternalLink className="inline h-3 w-3" /></a> 下载 LTS 版本（.msi 安装包），双击安装，一路 Next，装完后<strong>重启终端</strong>。
+              <strong>Git</strong>：从 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git-scm.com <ExternalLink className="inline h-3 w-3" /></a> 下载安装包，双击安装。
+            </p>
+            <p style={{ color: "var(--color-text-muted)", fontSize: "0.9rem", marginTop: "0.5rem" }}>
+              <strong>Node.js</strong>：从 <a href="https://registry.npmmirror.com/-/binary/node/latest-v22.x/" target="_blank" rel="noopener">npmmirror（淘宝镜像）<ExternalLink className="inline h-3 w-3" /></a> 下载国内加速的 Node.js 安装包（速度快），或从 <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org <ExternalLink className="inline h-3 w-3" /></a> 官方站下载。选 <code>.msi</code> 版本，双击安装，一路 Next，装完后<strong>重启终端</strong>。
             </p>
           </Collapsible>
           <Collapsible summary="安装后验证">
