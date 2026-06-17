@@ -27,7 +27,7 @@ function renderClaudeInstall(platform: Platform) {
       <h2 id="section-prereqs"><span className="step-badge">1</span>安装前置依赖</h2>
       {isWin && (
         <>
-          <p>需要 <strong>Git for Windows</strong>：提供 Bash 命令行环境，Claude Code 的原生安装脚本依赖 Bash 执行。同时也用于 Git 版本管理：</p>
+          <p>需要 <strong>Git for Windows</strong>：提供 Bash 命令行环境，Claude Code 的原生安装脚本依赖 Bash 执行。同时也用于 Git 版本管理。如已安装 Git 可跳过：</p>
           <CodeBlock language="powershell" code={`# 安装 Git for Windows\nwinget install Git.Git`} />
           <Collapsible summary="安装后验证">
             <p style={{ color: "var(--color-text-muted)", fontSize: "0.9rem" }}>
@@ -42,11 +42,11 @@ function renderClaudeInstall(platform: Platform) {
       )}
       {isMac && (
         <>
-          <p>macOS 需要 <strong>Homebrew</strong> 包管理器（已安装可跳过）：</p>
-          <CodeBlock language="bash" code={`# 安装 Homebrew\n# ⚠️ raw.githubusercontent.com 在国内可能无法访问\n# 如遇超时，可搜索"Homebrew 国内镜像安装"使用国内源\n/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`} />
+          <p>需要安装 <strong>Homebrew</strong> 包管理器和 <strong>Node.js 18+</strong>：</p>
+          <CodeBlock language="bash" code={`# 安装 Homebrew\n# ⚠️ raw.githubusercontent.com 在国内可能无法访问\n# 如遇超时，可搜索"Homebrew 国内镜像安装"使用国内源\n/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"\n\n# 安装 Node.js 22.x（方式三 npm 安装需要）\nbrew install node@22`} />
           <Collapsible summary="安装后验证">
             <p style={{ color: "var(--color-text-muted)", fontSize: "0.9rem" }}>
-              执行后应看到：安装脚本提示 → 输入密码 → "Installation successful!"。安装完成后运行 <code>brew --version</code> 应输出 <code>Homebrew 4.x.x</code>。
+              执行后应看到：安装脚本提示 → 输入密码 → "Installation successful!"。安装完成后运行 <code>brew --version</code>（应输出 Homebrew 4.x.x）和 <code>node --version</code>（应输出 v22.x.x）。
             </p>
           </Collapsible>
           <p className="text-[14px]" style={{ color: "var(--color-text-muted)" }}>
@@ -172,6 +172,10 @@ function renderClaudeInstall(platform: Platform) {
       <h3>方式三：npm 安装（三端通用）</h3>
       <p>
         npm 是 Claude Code 最早的安装方式。自 v2.1.15 起，官方已将其标记为弃用，推荐原生安装器代替，但 npm 包仍正常更新（截至 2026-06 最新版 2.1.177），仍在维护。当原生安装器或包管理器不可用时，可通过 npm 安装。
+      </p>
+
+      <p className="text-[14px] mb-3" style={{ color: "var(--color-text-muted)" }}>
+        npm 需要 Node.js 18+——{isWin ? "从 nodejs.org 下载 .msi 安装包即可" : isMac ? "如果还没装，回到 §1 前置依赖先装好 Node.js" : "如果还没装，回到 §1 前置依赖先装好 Node.js"}。
       </p>
 
       {(!isWin && !isMac) && (
