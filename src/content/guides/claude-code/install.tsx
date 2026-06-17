@@ -27,11 +27,17 @@ function renderClaudeInstall(platform: Platform) {
       <h2 id="section-prereqs"><span className="step-badge">1</span>安装前置依赖</h2>
       {isWin && (
         <>
-          <p>需要 <strong>Git for Windows</strong>：提供 Bash 命令行环境，Claude Code 的原生安装脚本依赖 Bash 执行。同时也用于 Git 版本管理。如已安装 Git 可跳过：</p>
-          <CodeBlock language="powershell" code={`# 安装 Git for Windows\nwinget install Git.Git`} />
+          <p>需要 <strong>Git for Windows</strong> 和 <strong>Node.js 18+</strong>：Git 用于 Bash 命令行环境（原生安装脚本依赖 Bash），Node.js 用于方式三（npm 安装）。如已安装可跳过：</p>
+          <CodeBlock language="powershell" code={`# 安装 Git for Windows\nwinget install Git.Git\n\n# 安装 Node.js 22.x（LTS）\nwinget install OpenJS.NodeJS.LTS`} />
+          <Collapsible summary="如果没有 winget">
+            <p style={{ color: "var(--color-text-muted)", fontSize: "0.9rem" }}>
+              Git 从 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git-scm.com <ExternalLink className="inline h-3 w-3" /></a> 手动下载安装；
+              Node.js 从 <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org <ExternalLink className="inline h-3 w-3" /></a> 下载 LTS 版本（.msi 安装包），双击安装，一路 Next，装完后<strong>重启终端</strong>。
+            </p>
+          </Collapsible>
           <Collapsible summary="安装后验证">
             <p style={{ color: "var(--color-text-muted)", fontSize: "0.9rem" }}>
-              执行后应看到：下载进度条 → "已成功安装"。安装后需<strong>重启终端</strong>使 Git 生效。重启后运行 <code>git --version</code>，应输出 <code>git version 2.4x.x</code>。
+              安装后重启终端，运行 <code>git --version</code>（应输出 git version 2.4x.x）和 <code>node --version</code>（应输出 v22.x.x）。
             </p>
           </Collapsible>
           <p className="text-[14px]" style={{ color: "var(--color-text-muted)" }}>
@@ -175,7 +181,7 @@ function renderClaudeInstall(platform: Platform) {
       </p>
 
       <p className="text-[14px] mb-3" style={{ color: "var(--color-text-muted)" }}>
-        npm 需要 Node.js 18+——{isWin ? "从 nodejs.org 下载 .msi 安装包即可" : isMac ? "如果还没装，回到 §1 前置依赖先装好 Node.js" : "如果还没装，回到 §1 前置依赖先装好 Node.js"}。
+        npm 需要 Node.js 18+。{isWin ? "如果还没装，回到 §1 前置依赖" : "如果还没装，回到 §1 前置依赖"}先装好。
       </p>
 
       {(!isWin && !isMac) && (
